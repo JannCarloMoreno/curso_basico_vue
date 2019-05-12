@@ -8,13 +8,20 @@
   </head>
   <body>
     <div id="app">
-      <!-- <button v-on:click='sumar'>Sumar 1</button>
-      <button v-on:click='restar'>Restar 1</button> -->
-      <!-- <button @click='sumar'>Sumar 1</button>
-      <button @click='restar'>Restar 1</button> -->
-      <button @click='contador++'>Sumar 1</button>
-      <button @click='contador--'>Restar 1</button>
-      El contador esta en {{ contador }}
+      <input type="text" name="nombre" placeholder="ingresa tu nombre" v-model="nombre">
+      <p>Tu nombre en mayuscula es: {{ nombre | uppercase }}</p>
+      <form @submit.prevent='submit' action="" method="get">
+        <h2>Cuales son tus cursos favoritos?</h2>
+        <input v-model="cursos" type="checkbox" id="vue" value="Vue">
+        <label for="vue">Curso de Vuejs</label>
+        <input v-model="cursos" type="checkbox" id="ceo" value="ceo">
+        <label for="ceo">Curso de CEO</label>
+        <input v-model="cursos" type="checkbox" id="react" value="react">
+        <label for="react">Curso de React y Redux</label>
+        <input v-model="cursos"  type="checkbox" id="growth" value="growth">
+        <label for="growth">Curso de Growth marketing</label>
+        <button type="submit">Enviar</button>
+      </form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -22,17 +29,20 @@
       let app = new Vue({
         el: '#app',
         data: {
-          contador: 0
+          nombre: "",
+          cursos: []
         },
-        /*methods: {
-          sumar: function (){
-            this.contador++
-          },
-          restar: function(){
-            this.contador--
+        filters: {
+          uppercase: function(str){
+            return str.toUpperCase()
           }
-
-        }*/
+        },
+        methods: {
+          submit: function(){
+            console.log('Se ejecuta el metodo submit')
+            console.log(this.cursos)
+          }
+        },
       });
     </script>
   </body>
