@@ -8,19 +8,8 @@
   </head>
   <body>
     <div id="app">
-      <!--         <template v-if= "mostrar">
-            <h1 >Este es mi titulo</h1>
-            <h2>Este es mi subtitulo</h2>
-            <a :href="url" target="blank">Ir a {{ pagina }}</a>
-        </template> -->
-      <div v-show="mostrar">
-        <h1>Este es mi titulo</h1>
-        <h2>Este es mi subtitulo</h2>
-        <a :href="url" target="blank">Ir a {{ pagina }}</a>
-      </div>
-      <div v-show="!mostrar">
-        Esto esta oculto
-      </div>
+        <h1>{{ titulo | uppercase }}</h1>
+        <h2>{{ subtitulo | lowercase | capitalize }}</h2>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -28,9 +17,19 @@
       let app = new Vue({
         el: "#app",
         data: {
-          url: "https://google.com",
-          pagina: "Google",
-          mostrar: true
+          titulo: 'Estas en platzi',
+          subtitulo: 'Estas viendo el curso de Vuejs',
+        },
+        filters: {
+          uppercase: function(str) {
+            return str.toUpperCase()
+          },
+          lowercase: function(str){
+            return str.toLowerCase()
+          },
+          capitalize: function(str){
+            return str.charAt(0).toUpperCase() + str.substr(1,str.lenght)
+          }
         }
       });
     </script>
