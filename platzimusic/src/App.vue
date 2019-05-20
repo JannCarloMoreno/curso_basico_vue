@@ -3,11 +3,13 @@
       img(src='./assets/logo.png')
       h1 PlatziMusic
       ul
-        li(v-for="artist in artists") {{artist.name}}
+        artist(v-for='artist in artists' v-bind:artist='artist' v-bind:key='artist.mbid')
+
 </template>
 
 <script>
 import getArtists from './API/index'
+import Artist from '../components/Artist'
 export default {
   name: 'app',
   data () {
@@ -15,10 +17,13 @@ export default {
       artists: []
     }
   },
-  mounted: function() {
+  components: {
+    Artist: Artist
+  },
+  mounted: function(){
     const self = this
     getArtists()
-      .then(function(artists) {
+      .then(function(artists){
         self.artists = artists
       })
   }
